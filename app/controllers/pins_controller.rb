@@ -6,17 +6,14 @@ class PinsController < ApplicationController
   respond_to :html
 
   def index
-    @pins = Pin.all
-    respond_with(@pins)
+    @pins = Pin.all.order("created_at DESC")
   end
 
   def show
-    respond_with(@pin)
   end
 
   def new
     @pin = current_user.pins.build
-    respond_with(@pin)
   end
 
   def edit
@@ -25,17 +22,14 @@ class PinsController < ApplicationController
   def create
     @pin = current_user.pins.build(pin_params)
     @pin.save
-    respond_with(@pin)
   end
 
   def update
     @pin.update(pin_params)
-    respond_with(@pin)
   end
 
   def destroy
     @pin.destroy
-    respond_with(@pin)
   end
 
   private
