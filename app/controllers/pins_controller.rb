@@ -7,29 +7,36 @@ class PinsController < ApplicationController
 
   def index
     @pins = Pin.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 20)
+    respond_with(@pins)
   end
 
   def show
+    respond_with(@pin)
   end
 
   def new
     @pin = current_user.pins.build
+    respond_with(@pin)
   end
 
   def edit
+    respond_with(@pin)
   end
 
   def create
     @pin = current_user.pins.build(pin_params)
     @pin.save
+    respond_with(@pin)
   end
 
   def update
     @pin.update(pin_params)
+    respond_with(@pin)
   end
 
   def destroy
     @pin.destroy
+    respond_with(@pin)
   end
 
   private
